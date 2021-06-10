@@ -14,6 +14,7 @@ call plug#begin()
   Plug 'lifepillar/vim-gruvbox8'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-commentary'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 call plug#end()
 " Plugins END
 "------------------------------------------------
