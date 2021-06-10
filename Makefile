@@ -4,7 +4,7 @@ MY_CONF := $(HOME)/dotfiles
 
 all: omzsh nvim git
 
-terminal: alacritty tmux gitmux
+terminal: alacritty tmux
 
 omzsh: zsh avit-theme
 
@@ -16,9 +16,6 @@ git-dusk: $(MY_CONF)/$(GIT_DUSK)
 
 alacritty: $(MY_CONF)/$(ALACRITTY) | .config/alacritty
 	ln -fs $< $(LN_ALACRITTY)
-
-gitmux: $(MY_CONF)/$(GITMUX)
-	ln -fs $< $(LN_GITMUX)
 
 nvim: $(MY_CONF)/$(INITVIM) | .config/nvim
 	ln -fs $< $(LN_INITVIM)

@@ -6,7 +6,6 @@
 - [tmux](https://github.com/tmux/tmux)
 - [alacritty](https://github.com/alacritty/alacritty)
 - [vim-plug](https://github.com/junegunn/vim-plug)
-- ([gitmux](https://github.com/arl/gitmux) (save to 'usr/local/bin' in PATH))
 - [JetBrains Mono](https://www.jetbrains.com/lp/mono/)
 
 # Setup

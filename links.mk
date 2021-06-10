@@ -1,5 +1,4 @@
 ALACRITTY := alacritty.yml
-GITMUX := gitmux.conf
 INITVIM := init.vim
 TMUX := tmux.conf
 ZSH := zshrc
@@ -8,7 +7,6 @@ GIT := gitconfig
 GIT_DUSK := gitconfig-dusk
 
 LN_ALACRITTY := $(HOME)/.config/alacritty/$(ALACRITTY)
-LN_GITMUX := $(HOME)/.$(GITMUX)
 LN_INITVIM := $(HOME)/.config/nvim/$(INITVIM)
 LN_TMUX := $(HOME)/.$(TMUX)
 LN_ZSH := $(HOME)/.$(ZSH)
