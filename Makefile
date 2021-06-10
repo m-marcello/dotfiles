@@ -1,30 +1,36 @@
 include links.mk
 
-MY_CONF := ~/dotfiles
+MY_CONF := $(HOME)/dotfiles
 
-all: omzsh nvim
+all: omzsh nvim git
 
-nvim: alacritty initvim tmux
+terminal: alacritty tmux gitmux
 
 omzsh: zsh avit-theme
 
+git: $(MY_CONF)/$(GIT) git-dusk
+	ln -fs $< $(LN_GIT)
+
+git-dusk: $(MY_CONF)/$(GIT_DUSK)
+	ln -fs $< $(LN_GIT_DUSK)
+
 alacritty: $(MY_CONF)/$(ALACRITTY) | .config/alacritty
-	ln -fs $(MY_CONF)/$(ALACRITTY) $(LN_ALACRITTY)
+	ln -fs $< $(LN_ALACRITTY)
 
 gitmux: $(MY_CONF)/$(GITMUX)
-	ln -fs $(MY_CONF)/$(GITMUX) $(LN_GITMUX)
+	ln -fs $< $(LN_GITMUX)
 
-initvim: $(MY_CONF)/$(INITVIM) | .config/nvim
-	ln -fs $(MY_CONF)/$(INITVIM) $(LN_INITVIM)
+nvim: $(MY_CONF)/$(INITVIM) | .config/nvim
+	ln -fs $< $(LN_INITVIM)
 
 tmux: $(MY_CONF)/$(TMUX)
-	ln -fs $(MY_CONF)/$(TMUX) $(LN_TMUX)
+	ln -fs $< $(LN_TMUX)
 
 zsh: $(MY_CONF)/$(ZSH)
-	ln -fs $(MY_CONF)/$(ZSH) $(LN_ZSH)
+	ln -fs $< $(LN_ZSH)
 
 avit-theme: $(MY_CONF)/$(AVIT_THEME)
-	ln -fs $(MY_CONF)/$(AVIT_THEME) $(LN_AVIT_THEME)
+	ln -fs $< $(LN_AVIT_THEME)
 
 .config/nvim:
 	mkdir -p ~/$@
