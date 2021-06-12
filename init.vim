@@ -36,9 +36,9 @@ set title
 set wrap
 setlocal wrap
 set clipboard+=unnamedplus
-" Setting END
-"------------------------------------------------
-
+set expandtab
+set softtabstop=4
+set shiftwidth=4
 "------------------------------------------------
 " persist START
 set undofile " Maintain undo history between sessions
