@@ -113,3 +113,10 @@ export EDITOR="$VISUAL"
 
 # add cargo binaries to binary search path
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# show cheatsheets
+function cs() {
+	echo "show cheatsheet for $1"
+	bat $HOME/dotfiles/cheatsheets/$1.md
+}
+
