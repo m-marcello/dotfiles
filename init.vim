@@ -14,8 +14,11 @@ call plug#begin()
   Plug 'lifepillar/vim-gruvbox8'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-commentary'
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
   Plug 'rust-lang/rust.vim'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+  Plug 'reedes/vim-pencil'
+  Plug 'godlygeek/tabular'
+  Plug 'plasticboy/vim-markdown'
 call plug#end()
 " Plugins END
 "------------------------------------------------
@@ -243,7 +246,22 @@ d
 
 "------------------------------------------------
 " Rust START
+" Run rustfmt on save
 let g:rustfmt_autosave = 1
 " Rust END
+"------------------------------------------------
+
+"------------------------------------------------
+" Markdown START
+" Disable header folding
+let g:vim_markdown_folding_disabled = 1
+
+" Turn on pencil for markdown files
+augroup pencil
+    autocmd!
+    autocmd FileType markdown,mkd   call pencil#init()
+    autocmd FileType text           call pencil#init({'wrap': 'hard'})
+augroup END
+" Markdown END
 "------------------------------------------------
 
