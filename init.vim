@@ -15,6 +15,7 @@ call plug#begin()
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-commentary'
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+  Plug 'rust-lang/rust.vim'
 call plug#end()
 " Plugins END
 "------------------------------------------------
@@ -58,7 +59,6 @@ syntax on
 set termguicolors
 colorscheme gruvbox8_hard
 set background=dark
-" let g:gruvbox_contrast = "hard"
 set cursorline
 set hidden
 set cmdheight=1
@@ -238,3 +238,12 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 d
+" Coc END
+"------------------------------------------------
+
+"------------------------------------------------
+" Rust START
+let g:rustfmt_autosave = 1
+" Rust END
+"------------------------------------------------
+
