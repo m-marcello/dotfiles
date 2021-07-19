@@ -16,7 +16,6 @@ call plug#begin()
   Plug 'tpope/vim-commentary'
   Plug 'rust-lang/rust.vim'
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-  Plug 'reedes/vim-pencil'
   Plug 'godlygeek/tabular'
   Plug 'plasticboy/vim-markdown'
 call plug#end()
@@ -40,9 +39,10 @@ set title
 set wrap
 setlocal wrap
 set clipboard+=unnamedplus
-set expandtab
-set softtabstop=4
+set noexpandtab
+set tabstop=4
 set shiftwidth=4
+"setlocal spell spelllang=en_us,de_de
 "------------------------------------------------
 " persist START
 set undofile " Maintain undo history between sessions
@@ -59,16 +59,16 @@ autocmd BufReadPost *
 "------------------------------------------------
 " Theme START
 syntax on
-set termguicolors
+"set termguicolors
 colorscheme gruvbox8_hard
-set background=dark
+"set background=dark
 set cursorline
 set hidden
 set cmdheight=1
 set laststatus=2
 
-let g:gruvbox_transp_bg = 1
-let g:gruvbox_italicize_strings = 0
+"let g:gruvbox_transp_bg = 1
+"let g:gruvbox_italicize_strings = 0
 
 set list
 set listchars=tab:»·,trail:·
@@ -120,17 +120,24 @@ let g:lightline = {
 " Align GitHub-flavored Markdown tables
 au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
+" Automatically append closing brackets
+inoremap [		[]<Left>
+inoremap {<CR>	{<CR><CR>}<Up><Tab>
+
+" Enter normal mode with 'kj'
+inoremap kj 	<Esc>
+
 " Toggle between buffers
-nmap <Leader>bn :bn<CR>
-nmap <Leader>bp :bp<CR>
-nnoremap <C-p> :Rg<Cr>
-nnoremap <C-e> :Files<Cr>
-nmap <Leader>bl :Buffers<CR>
-nmap <Leader>g :GFiles<CR>
-nmap <Leader>e :Files<CR>
-nmap <Leader>p :Rg<CR>
-nmap <Leader>g? :GFiles?<CR>
-nmap <Leader>h :History<CR>
+"nmap <Leader>bn :bn<CR>
+"nmap <Leader>bp :bp<CR>
+"nnoremap <C-p> :Rg<Cr>
+"nnoremap <C-e> :Files<Cr>
+"nmap <Leader>bl :Buffers<CR>
+"nmap <Leader>g :GFiles<CR>
+"nmap <Leader>e :Files<CR>
+"nmap <Leader>p :Rg<CR>
+"nmap <Leader>g? :GFiles?<CR>
+"nmap <Leader>h :History<CR>
 " Remaps END
 "------------------------------------------------
 
@@ -138,7 +145,7 @@ nmap <Leader>h :History<CR>
 " Coc START
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+"set updatetime=300
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -158,25 +165,25 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+"if has('nvim')
+"  inoremap <silent><expr> <c-space> coc#refresh()
+"else
+"  inoremap <silent><expr> <c-@> coc#refresh()
+"endif
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional eit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+"if exists('*complete_info')
+"  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+"else
+"  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"endif
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+"nmap <silent> [g <Plug>(coc-diagnostic-prev)
+"nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -185,62 +192,61 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+"nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocActionAsync('doHover')
-  endif
-endfunction
+"function! s:show_documentation()
+"  if (index(['vim','help'], &filetype) >= 0)
+"    execute 'h '.expand('<cword>')
+"  else
+"    call CocActionAsync('doHover')
+"  endif
+"endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+"nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+"xmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
 
-augroup mygroup
-  autocmd!
+"augroup mygroup
+"  autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+"  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
+"  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+"augroup end
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ga  <Plug>(coc-codeaction)
+"nmap <leader>ga  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+"nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
+"command! -nargs=0 Format :call CocAction('format')
 
 " Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+"command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+"command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+"nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+"nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+"nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+"nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+"nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-d
+"nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Coc END
 "------------------------------------------------
 
@@ -256,12 +262,8 @@ let g:rustfmt_autosave = 1
 " Disable header folding
 let g:vim_markdown_folding_disabled = 1
 
-" Turn on pencil for markdown files
-augroup pencil
-    autocmd!
-    autocmd FileType markdown,mkd   call pencil#init()
-    autocmd FileType text           call pencil#init({'wrap': 'hard'})
-augroup END
+" Disable autoclose of preview
+let g:mkdp_auto_close = 0
 " Markdown END
 "------------------------------------------------
 
