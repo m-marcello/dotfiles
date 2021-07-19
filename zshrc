@@ -98,6 +98,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# clearhome command for Codam computers
+alias clearhome='echo -n "Available before:\t"; df -h | grep /Users/$USER | sed '\''s/  */:/g'\'' | cut -d '\'':'\'' -f 4; unsetopt nomatch; rm -Rf ~/Library/*.42_cache_bak*; rm -Rf ~/*.42_cache_bak_*; setopt nomatch; echo -n "Available after:\t"; df -h | grep /Users/$USER | sed '\''s/  */:/g'\'' | cut -d '\'':'\'' -f 4;'
 
 # replace cat with bat
 #alias cat='bat --paging=never'
@@ -120,3 +122,5 @@ function cs() {
 	bat $HOME/dotfiles/cheatsheets/$1.md
 }
 
+# Load Homebrew config script
+source $HOME/.brewconfig.zsh
