@@ -2,7 +2,7 @@ include links.mk
 
 MY_CONF := $(HOME)/dotfiles
 
-all: omzsh nvim git
+all: omzsh nvim git terminal
 
 terminal: alacritty tmux
 

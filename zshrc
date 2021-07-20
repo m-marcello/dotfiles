@@ -124,3 +124,6 @@ function cs() {
 
 # Load Homebrew config script
 source $HOME/.brewconfig.zsh
+if [ -f /etc/zsh.cnf ]; then
+ . /etc/zsh.cnf
+fi
