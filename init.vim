@@ -20,6 +20,7 @@ call plug#begin()
   Plug 'lifepillar/vim-gruvbox8'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-commentary'
+  Plug 'scrooloose/nerdtree'
   Plug 'rust-lang/rust.vim'
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
   Plug 'godlygeek/tabular'
@@ -273,3 +274,9 @@ let g:mkdp_auto_close = 0
 " Markdown END
 "------------------------------------------------
 
+"------------------------------------------------
+" NerdTREE START
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+" NerdTREE END
+"-----------------------------------------------
