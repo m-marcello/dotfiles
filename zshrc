@@ -107,7 +107,7 @@ alias clearhome='echo -n "Available before:\t"; df -h | grep /Users/$USER | sed 
 # My additions
 
 # add libcriterion to library search path
-export LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:$HOME/.brew/lib:$LD_LIBRARY_PATH"
 
 # set neovim as editor
 export VISUAL=nvim
