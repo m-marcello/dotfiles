@@ -123,7 +123,7 @@ function cs() {
 }
 
 # Load Homebrew config script when on OS X
-if [[ 'uname' != "Linux" ]]; then
+if [[ $(uname -s) == Darwin ]]; then
 	source $HOME/.brewconfig.zsh
 fi
 if [ -f /etc/zsh.cnf ]; then
