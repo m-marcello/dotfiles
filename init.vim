@@ -15,6 +15,7 @@ call plug#begin()
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/vim-easy-align'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
   Plug 'mengelbrecht/lightline-bufferline'
   Plug 'lifepillar/vim-gruvbox8'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
