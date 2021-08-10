@@ -9,28 +9,42 @@ endif
 "------------------------------------------------
 " Plugins START
 call plug#begin()
+  " show git diff in sign column
   Plug 'airblade/vim-gitgutter'
-  Plug 'cespare/vim-toml'
+  " maintain consistent coding style for multiple developers working on the
+  " same project across various editors
   Plug 'editorconfig/editorconfig-vim'
+  " statusline/tabline configuration
   Plug 'itchyny/lightline.vim'
-  Plug 'junegunn/vim-easy-align'
+  Plug 'mengelbrecht/lightline-bufferline'
+  " fuzzy-finder
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  Plug 'mengelbrecht/lightline-bufferline'
+  " gruvbox theme
   Plug 'lifepillar/vim-gruvbox8'
+  " coc
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " comment with 'gc'+movement or 'gcc'
   Plug 'tpope/vim-commentary'
+  " show files in treeview with 'ctrl t'
   Plug 'scrooloose/nerdtree'
+  " rust support
   Plug 'rust-lang/rust.vim'
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+  Plug 'cespare/vim-toml'
+  " align text to pattern
   Plug 'godlygeek/tabular'
+  " markdown support
   Plug 'plasticboy/vim-markdown'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+  " move between splits and tmux panes with 'ctrl [dir]'
+  Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 " Plugins END
 "------------------------------------------------
 
 "------------------------------------------------
 " Settings START
+" map <leader> key to Space
 let mapleader = "\<Space>"
 filetype plugin on
 set completeopt=menuone
@@ -49,7 +63,8 @@ set clipboard+=unnamedplus
 set noexpandtab
 set tabstop=4
 set shiftwidth=4
-"setlocal spell spelllang=en_us,de_de
+" using coc-spell-checker instead of build in
+" setlocal spell spelllang=en_us,de_de
 "------------------------------------------------
 " persist START
 set undofile " Maintain undo history between sessions
@@ -124,15 +139,22 @@ let g:lightline = {
 
 "------------------------------------------------
 " Remaps START
-" Align GitHub-flavored Markdown tables
-au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
-
 " Automatically append closing brackets
 inoremap [		[]<Left>
 inoremap {<CR>	{<CR><CR>}<Up><Tab>
 
 " Enter normal mode with 'kj'
 inoremap kj 	<Esc>
+
+" set key mappings for easier navigation between splits
+" `ctrl-w [dir]` becomes `ctrl-[dir]
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Align GitHub-flavored Markdown tables
+" au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 " Toggle between buffers
 "nmap <Leader>bn :bn<CR>
@@ -170,6 +192,10 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" Remap for do codeAction of selected region for coc-spell
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
 
 " Use <c-space> to trigger completion.
 "if has('nvim')
@@ -219,7 +245,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 "xmap <leader>f  <Plug>(coc-format-selected)
 "nmap <leader>f  <Plug>(coc-format-selected)
 
-"augroup mygroup
+"augroup augroup
 "  autocmd!
   " Setup formatexpr specified filetype(s).
 "  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
