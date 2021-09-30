@@ -1,38 +1,41 @@
 include links.mk
 
-MY_CONF := $(HOME)/dotfiles
+DOTFILES := $(HOME)/dotfiles
 
-all: omzsh nvim git terminal
+all: shell $(LN_GIT) $(LN_INITVIM) $(LN_TMUX)
 
-terminal: alacritty tmux
+# terminal: alacritty tmux
 
-omzsh: zsh avit-theme
+shell: $(LN_ZSH) $(LN_AVIT_THEME) $(LN_ALIASES)
 
-git: $(MY_CONF)/$(GIT) git-dusk
-	ln -fs $< $(LN_GIT)
+$(LN_GIT): $(DOTFILES)/$(GIT) $(LN_GIT_DUSK)
+	ln -fs $< $@
 
-git-dusk: $(MY_CONF)/$(GIT_DUSK)
-	ln -fs $< $(LN_GIT_DUSK)
+$(LN_GIT_DUSK): $(DOTFILES)/$(GIT_DUSK)
+	ln -fs $< $@
 
-alacritty: $(MY_CONF)/$(ALACRITTY) | .config/alacritty
-	ln -fs $< $(LN_ALACRITTY)
+# $(LN_ALACRITTY): $(DOTFILES)/$(ALACRITTY) | .config/alacritty
+	# ln -fs $< $@
 
-nvim: $(MY_CONF)/$(INITVIM) | .config/nvim
-	ln -fs $< $(LN_INITVIM)
+$(LN_INITVIM): $(DOTFILES)/$(INITVIM) | $(HOME)/.config/nvim
+	ln -fs $< $@
 
-tmux: $(MY_CONF)/$(TMUX)
-	ln -fs $< $(LN_TMUX)
+$(LN_TMUX): $(DOTFILES)/$(TMUX)
+	ln -fs $< $@
 
-zsh: $(MY_CONF)/$(ZSH)
-	ln -fs $< $(LN_ZSH)
+$(LN_ZSH): $(DOTFILES)/$(ZSH)
+	ln -fs $< $@
 
-avit-theme: $(MY_CONF)/$(AVIT_THEME)
-	ln -fs $< $(LN_AVIT_THEME)
+$(LN_AVIT_THEME): $(DOTFILES)/$(AVIT_THEME)
+	ln -fs $< $@
 
-.config/nvim:
+$(LN_ALIASES): $(DOTFILES)/$(ALIASES)
+	ln -fs $< $@
+
+$(HOME)/.config/nvim:
 	mkdir -p ~/$@
 
-.config/alacritty:
-	mkdir -p ~/$@
+# .config/alacritty:
+	# mkdir -p ~/$@
 
-.PHONY: all nvim omzsh .config .config/nvim
+.PHONY: all shell
