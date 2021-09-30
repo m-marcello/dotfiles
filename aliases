@@ -1,0 +1,15 @@
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# clearhome command for Codam computers
+alias clearhome='echo -n "Available before:\t"; df -h | grep /Users/$USER | sed '\''s/  */:/g'\'' | cut -d '\'':'\'' -f 4; unsetopt nomatch; rm -Rf ~/Library/*.42_cache_bak*; rm -Rf ~/*.42_cache_bak_*; setopt nomatch; echo -n "Available after:\t"; df -h | grep /Users/$USER | sed '\''s/  */:/g'\'' | cut -d '\'':'\'' -f 4;'
+
+# replace cat with bat
+#alias cat='bat --paging=never'
+
