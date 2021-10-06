@@ -117,3 +117,4 @@ fi
 if [ -f /etc/zsh.cnf ]; then
  . /etc/zsh.cnf
 fi
+[[ -s /Users/mmarcell/.rsvm/rsvm.sh ]] && . /Users/mmarcell/.rsvm/rsvm.sh # This loads RSVM
