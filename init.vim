@@ -6,6 +6,8 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
+
 "------------------------------------------------
 " Plugins START
 call plug#begin()
@@ -19,7 +21,7 @@ call plug#begin()
   Plug 'mengelbrecht/lightline-bufferline'
   " fuzzy-finder
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
+  " Plug 'junegunn/fzf.vim'
   " gruvbox theme
   Plug 'lifepillar/vim-gruvbox8'
   " coc
@@ -41,6 +43,7 @@ call plug#begin()
 call plug#end()
 " Plugins END
 "------------------------------------------------
+
 
 "------------------------------------------------
 " Settings START
@@ -65,11 +68,14 @@ set tabstop=4
 set shiftwidth=4
 " using coc-spell-checker instead of build in
 " setlocal spell spelllang=en_us,de_de
+" Settings END
+"------------------------------------------------
+
+
 "------------------------------------------------
 " persist START
 set undofile " Maintain undo history between sessions
 set undodir=~/.vim/undodir
-
 " Persist cursor
 autocmd BufReadPost *
   \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
@@ -77,6 +83,7 @@ autocmd BufReadPost *
   \ | endif
 " persist END
 "------------------------------------------------
+
 
 "------------------------------------------------
 " Theme START
@@ -88,18 +95,14 @@ set cursorline
 set hidden
 set cmdheight=1
 set laststatus=2
-
 "let g:gruvbox_transp_bg = 1
 "let g:gruvbox_italicize_strings = 0
-
 set list
 set listchars=tab:»·,trail:·
-
-" let buffers be clickable
+" make buffers be clickable
 let g:lightline#bufferline#clickable=1
 let g:lightline#bufferline#shorten_path=1
 let g:lightline#bufferline#min_buffer_count=1
-
 let g:lightline = {
 \  'colorscheme': 'jellybeans',
 \  'active': {
@@ -133,9 +136,9 @@ let g:lightline = {
 \    'buffers': 'tabsel'
 \  }
 \}
-
 " Theme END
 "------------------------------------------------
+
 
 "------------------------------------------------
 " Remaps START
@@ -146,22 +149,22 @@ inoremap {<CR>	{<CR><CR>}<Up><Tab>
 " Enter normal mode with 'kj'
 inoremap kj 	<Esc>
 
-" set key mappings for easier navigation between splits
-" `ctrl-w [dir]` becomes `ctrl-[dir]
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" Align GitHub-flavored Markdown tables
-" au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
+" Navigate between splits disabled in favor for navigating tmux panes
+" `ctrl-w [direction]` becomes `ctrl-[direction]
+"nnoremap <C-J> <C-W><C-J>
+"nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-L>
+"nnoremap <C-H> <C-W><C-H>
 
 " Toggle between buffers
-"nmap <Leader>bn :bn<CR>
-"nmap <Leader>bp :bp<CR>
+nmap <Leader>bn :bn<CR>
+nmap <Leader>bp :bp<CR>
+
+" List buffers
+nmap <Leader>bl :Buffers<CR>
+
 "nnoremap <C-p> :Rg<Cr>
 "nnoremap <C-e> :Files<Cr>
-"nmap <Leader>bl :Buffers<CR>
 "nmap <Leader>g :GFiles<CR>
 "nmap <Leader>e :Files<CR>
 "nmap <Leader>p :Rg<CR>
@@ -170,11 +173,18 @@ nnoremap <C-H> <C-W><C-H>
 " Remaps END
 "------------------------------------------------
 
+
 "------------------------------------------------
 " Coc START
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 "set updatetime=300
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -192,7 +202,6 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
 " Remap for do codeAction of selected region for coc-spell
 vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
@@ -208,9 +217,9 @@ nmap <leader>a <Plug>(coc-codeaction-selected)
 " position. Coc only does snippet and additional eit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
 "if exists('*complete_info')
-"  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+"  inoremap <expr> <cr> complete_info()['selected'] != '-1' ? '\<C-y>' : '\<C-g>u\<CR>'
 "else
-"  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"  inoremap <expr> <cr> pumvisible() ? '\<C-y>' : '\<C-g>u\<CR>'
 "endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -218,70 +227,19 @@ nmap <leader>a <Plug>(coc-codeaction-selected)
 "nmap <silent> [g <Plug>(coc-diagnostic-prev)
 "nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-"nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-"function! s:show_documentation()
-"  if (index(['vim','help'], &filetype) >= 0)
-"    execute 'h '.expand('<cword>')
-"  else
-"    call CocActionAsync('doHover')
-"  endif
-"endfunction
-
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
 " Symbol renaming.
 "nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code.
-"xmap <leader>f  <Plug>(coc-format-selected)
-"nmap <leader>f  <Plug>(coc-format-selected)
-
-"augroup augroup
-"  autocmd!
-  " Setup formatexpr specified filetype(s).
-"  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-"  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-"augroup end
-
 " Remap keys for applying codeAction to the current buffer.
 "nmap <leader>ga  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-"nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Add `:Format` command to format current buffer.
-"command! -nargs=0 Format :call CocAction('format')
 
 " Add `:Fold` command to fold current buffer.
 "command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-"command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Mappings for CoCList
-" Show all diagnostics.
-"nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" Show commands.
-"nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-"nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-"nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-"nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-"nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Coc END
 "------------------------------------------------
+
 
 "------------------------------------------------
 " Rust START
@@ -289,6 +247,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 let g:rustfmt_autosave = 1
 " Rust END
 "------------------------------------------------
+
 
 "------------------------------------------------
 " Markdown START
@@ -299,6 +258,7 @@ let g:vim_markdown_folding_disabled = 1
 let g:mkdp_auto_close = 0
 " Markdown END
 "------------------------------------------------
+
 
 "------------------------------------------------
 " NerdTREE START
