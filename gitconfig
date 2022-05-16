@@ -7,4 +7,3 @@
 
 [includeif "gitdir:~/dusk/"]
 	path = .gitconfig-dusk
-
