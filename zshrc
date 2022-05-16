@@ -9,7 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="avit"
+ZSH_THEME="avit_moana"
 
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -68,7 +68,7 @@ ZSH_THEME="avit"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git cargo)
+plugins=(git rust)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -94,6 +94,9 @@ source $HOME/.aliases
 
 # My additions
 
+# update mirrors on Manjaro
+alias updatemirrors='pacman-mirrors -f 5'
+
 # add libcriterion to library search path
 export LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:$HOME/.brew:$LD_LIBRARY_PATH"
 
@@ -103,6 +106,9 @@ export EDITOR="$VISUAL"
 
 # add cargo binaries to binary search path
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# set terminal colors to 256
+export TERM=xterm-256color
 
 # show cheatsheets
 function cs() {
