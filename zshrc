@@ -107,8 +107,8 @@ export EDITOR="$VISUAL"
 # add cargo binaries to binary search path
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# set terminal colors to 256
-export TERM=xterm-256color
+# set terminal colors to 256 not set because it breaks gruvbox colorscheme
+# export TERM=xterm-256color
 
 # show cheatsheets
 function cs() {
