@@ -88,7 +88,7 @@ autocmd BufReadPost *
 "------------------------------------------------
 " Theme START
 syntax on
-"set termguicolors
+"set Gruvbox theme
 colorscheme gruvbox8_hard
 "set background=dark
 set cursorline
@@ -96,7 +96,7 @@ set hidden
 set cmdheight=1
 set laststatus=2
 "let g:gruvbox_transp_bg = 1
-"let g:gruvbox_italicize_strings = 0
+let g:gruvbox_italicize_strings=0
 set list
 set listchars=tab:»·,trail:·
 " make buffers be clickable
