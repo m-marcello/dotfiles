@@ -1,0 +1,16 @@
+# Settings that are in the '.inputrc' file affect *all* programs that use the
+# GNU readline library, not just `zsh`. Think of the '.inputrc' file as being a
+# configuration file for GNU Readline similar to how '.zshrc' is a configuration
+# file for `zsh`.
+
+# set neovim as editor
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
+# Remap `kj` to escape when in vi-insertion mode
+set editing-mode vi
+set keymap vi
+$if mode=vi 
+    set keymap vi-insert       #notice how the "jj" movement is
+    "kj": vi-movement-mode     #after 'set keymap vi-insert'?
+$endif

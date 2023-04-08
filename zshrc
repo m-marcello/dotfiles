@@ -68,7 +68,7 @@ ZSH_THEME="avit_moana"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rust)
+plugins=(git rust vi-mode fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -89,26 +89,24 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# My additions
+
 # Load aliases
 source $HOME/.aliases
-
-# My additions
 
 # update mirrors on Manjaro
 alias updatemirrors='pacman-mirrors -f 5'
 
 # add libcriterion to library search path
+# For using c-criterion unit tests on apple
 export LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:$HOME/.brew:$LD_LIBRARY_PATH"
-
-# set neovim as editor
-export VISUAL=nvim
-export EDITOR="$VISUAL"
 
 # add cargo binaries to binary search path
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # set terminal colors to 256 not set because it breaks gruvbox colorscheme
-# export TERM=xterm-256color
+# colors are set in tmux configurations instead
+#export TERM=xterm-256color
 
 # show cheatsheets
 function cs() {
@@ -124,3 +122,10 @@ if [ -f /etc/zsh.cnf ]; then
  . /etc/zsh.cnf
 fi
 [[ -s /Users/mmarcell/.rsvm/rsvm.sh ]] && . /Users/mmarcell/.rsvm/rsvm.sh # This loads RSVM
+
+# ----- For vi-mode plugin
+# Set indication when in normal mode
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+# Change prompt to line when in insert mode
+#VI_MODE_SET_CURSOR=true
+
