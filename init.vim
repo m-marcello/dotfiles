@@ -142,8 +142,8 @@ colorscheme gruvbox
 "  Source Vim configuration file and install plugins with 'leader 1'
 nnoremap <silent><leader>1 :source ~/.config/nvim/init.vim \| :PlugInstall<CR>
 " Automatically append closing brackets
-"inoremap [		[]<Left>
-inoremap {<CR>	{<CR><CR>}<Up><Tab>
+" inoremap [		[]<Left>
+inoremap {<CR>	{<CR>}<Esc>O
 
 " Enter normal mode with 'kj'
 inoremap kj 	<Esc>
