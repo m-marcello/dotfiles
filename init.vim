@@ -139,21 +139,17 @@ colorscheme gruvbox
 
 "------------------------------------------------
 " Remaps START
-"  Source Vim configuration file and install plugins with 'leader 1'
-nnoremap <silent><leader>1 :source ~/.config/nvim/init.vim \| :PlugInstall<CR>
-" Automatically append closing brackets
-" inoremap [		[]<Left>
-inoremap {<CR>	{<CR>}<Esc>O
+" source $MYVIMRC reloads the saved $MYVIMRC
+:nmap <Leader>s :source $MYVIMRC<CR>
+" opens $MYVIMRC for editing, or use :tabedit $MYVIMRC
+:nmap <Leader>v :e $MYVIMRC<CR>
 
 " Enter normal mode with 'kj'
 inoremap kj 	<Esc>
 
-" Navigate between splits disabled in favor for navigating tmux panes
-" `ctrl-w [direction]` becomes `ctrl-[direction]'
-"nnoremap <C-J> <C-W><C-J>
-"nnoremap <C-K> <C-W><C-K>
-"nnoremap <C-L> <C-W><C-L>
-"nnoremap <C-H> <C-W><C-H>
+" Automatically append closing brackets
+" inoremap [		[]<Left>
+inoremap {<CR>	{<CR>}<Esc>O
 
 " Toggle between buffers
 nmap <Leader>bn :bn<CR>
@@ -162,13 +158,8 @@ nmap <Leader>bp :bp<CR>
 " List buffers
 nmap <Leader>bl :bl<CR>
 
-"nnoremap <C-p> :Rg<Cr>
-"nnoremap <C-e> :Files<Cr>
-"nmap <Leader>g :GFiles<CR>
-"nmap <Leader>e :Files<CR>
-"nmap <Leader>p :Rg<CR>
-"nmap <Leader>g? :GFiles?<CR>
-"nmap <Leader>h :History<CR>
+" Show previously opened files
+nmap <Leader>h :History<CR>
 " Remaps END
 "------------------------------------------------
 
@@ -199,18 +190,19 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-function! s:check_back_space() abort
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 " Remap for do codeAction of selected region for coc-spell
-vmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
+" vmap <leader>a <Plug>(coc-codeaction-selected)
+" nmap <leader>a <Plug>(coc-codeaction-selected)
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
