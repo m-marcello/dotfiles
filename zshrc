@@ -116,12 +116,13 @@ function cs() {
 
 # Load Homebrew config script when on OS X
 if [[ $(uname -s) == Darwin ]]; then
-	source $HOME/.brewconfig.zsh
+	# add homebrew binary to search path
+	export PATH=$PATH:/opt/homebrew/bin
 fi
+
 if [ -f /etc/zsh.cnf ]; then
  . /etc/zsh.cnf
 fi
-[[ -s /Users/mmarcell/.rsvm/rsvm.sh ]] && . /Users/mmarcell/.rsvm/rsvm.sh # This loads RSVM
 
 # ----- For vi-mode plugin
 # Set indication when in normal mode

@@ -4,7 +4,7 @@ TMUX := tmux.conf
 ZSH := zshrc
 INPUTRC := inputrc
 ALIASES := aliases
-AVIT_THEME := avit.zsh-theme
+AVIT_THEME := avit_moana.zsh-theme
 GIT := gitconfig
 GIT_DUSK := gitconfig-dusk
 
