@@ -47,6 +47,9 @@ call plug#end()
 " map <leader> key to Space
 let mapleader = "\<Space>"
 filetype plugin on
+" following two lines are for rust.vim
+syntax enable
+filetype plugin indent on
 set completeopt=menuone
 set mouse=a
 set nobackup
@@ -152,14 +155,8 @@ inoremap kj 	<Esc>
 inoremap {<CR>	{<CR>}<Esc>O
 
 " Toggle between buffers
-nmap <Leader>bn :bn<CR>
-nmap <Leader>bp :bp<CR>
-
-" List buffers
-nmap <Leader>bl :bl<CR>
-
-" Show previously opened files
-nmap <Leader>h :History<CR>
+nmap <Leader>n :bn<CR>
+nmap <Leader>p :bp<CR>
 " Remaps END
 "------------------------------------------------
 
