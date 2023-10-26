@@ -94,9 +94,6 @@ source $ZSH/oh-my-zsh.sh
 # Load aliases
 source $HOME/.aliases
 
-# update mirrors on Manjaro
-alias updatemirrors='pacman-mirrors -f 5'
-
 # add libcriterion to library search path
 # For using c-criterion unit tests on apple
 export LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:$HOME/.brew:$LD_LIBRARY_PATH"
