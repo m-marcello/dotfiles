@@ -10,6 +10,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="avit_moana"
+# another good theme might be the following, although it is a bit cluttered
+# ZSH_THEME="jonathan"
 
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -127,3 +129,11 @@ VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 # Change prompt to line when in insert mode
 #VI_MODE_SET_CURSOR=true
 
+# export LIBRARY_PATH="/opt/homebrew/opt/z3/lib:$LIBRARY_PATH"
+# export LD_LIBRARY_PATH="/opt/homebrew/opt/z3/lib:$LD_LIBRARY_PATH"
+# export C_INCLUDE_PATH="/opt/homebrew/opt/z3/include:$C_INCLUDE_PATH"
+# export CPLUS_INCLUDE_PATH="/opt/homebrew/opt/z3/include:$CPLUS_INCLUDE_PATH"
+# export LDFLAGS="-L/opt/homebrew/opt/z3/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/z3/include"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

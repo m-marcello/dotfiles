@@ -67,8 +67,11 @@ set clipboard+=unnamedplus
 set noexpandtab
 set tabstop=4
 set shiftwidth=4
+" use `rust-gdb` rather than standard `gdb`
+" let g:termdegubber="rust-gdb"
+" setlocal spell spelllang=en_us
 " using coc-spell-checker instead of build in
-" setlocal spell spelllang=en_us,de_de
+setlocal spell spelllang=en_us,de_de
 " Settings END
 "------------------------------------------------
 
@@ -248,6 +251,10 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 
 "------------------------------------------------
 " Fzf START
+" The plug-in was enough to have fzf in the file search, but maybe this
+" more functionalities:
+" To use fzf in Vim, add the following line to your .vimrc
+set rtp+=/opt/homebrew/opt/fzf
 " Find files with fzf in the current dir (exclude the ones git ignores)
 nnoremap <C-f> :GFiles<CR>
 " Find files with fzf in the current dir (exclude the ones git ignores)
