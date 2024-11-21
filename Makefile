@@ -2,38 +2,42 @@ include links.mk
 
 DOTFILES := $(HOME)/dotfiles
 
-all: shell $(LN_GIT) $(LN_INITVIM) $(LN_COC) $(LN_TMUX)
+all: shell $(LN_GIT) $(LN_NVIM_KICKSTART) $(LN_TMUX)
 
 # terminal: alacritty tmux
 
 shell: $(LN_ZSH) $(LN_INPUTRC) $(LN_AVIT_THEME) $(LN_ALIASES)
 
-$(LN_GIT): $(DOTFILES)/$(GIT) $(LN_GIT_DUSK)
-	ln -fs $< $@
+git: $(DOTFILES)/$(GIT) $(LN_GIT_DUSK)
+	ln -fs $< $(LN_GIT)
 
-$(LN_GIT_DUSK): $(DOTFILES)/$(GIT_DUSK)
-	ln -fs $< $@
+git_dusk: $(DOTFILES)/$(GIT_DUSK)
+	ln -fs $< $(LN_GIT_DUSK)
 
-$(LN_INITVIM): $(DOTFILES)/$(INITVIM) | $(HOME)/.config/nvim
-	ln -fs $< $@
+# kickstart is not in the dotfiles dir
+nvim_kickstart: $(HOME)/$(NVIM_KICKSTART)
+	ln -fs $< $(LN_NVIM_KICKSTART)
 
-$(LN_COC): $(DOTFILES)/$(COC)
-	ln -fs $< $@
+init_vim: $(DOTFILES)/$(INITVIM) | $(HOME)/.config/nvim
+	ln -fs $< $(LN_INITVIM)
 
-$(LN_TMUX): $(DOTFILES)/$(TMUX)
-	ln -fs $< $@
+coc: $(DOTFILES)/$(COC)
+	ln -fs $< $(LN_COC)
 
-$(LN_ZSH): $(DOTFILES)/$(ZSH)
-	ln -fs $< $@
+tmux: $(DOTFILES)/$(TMUX)
+	ln -fs $< $(LN_TMUX)
 
-$(LN_INPUTRC): $(DOTFILES)/$(INPUTRC)
-	ln -fs $< $@
+zsh: $(DOTFILES)/$(ZSH)
+	ln -fs $< $(LN_ZSH)
 
-$(LN_AVIT_THEME): $(DOTFILES)/$(AVIT_THEME)
-	ln -fs $< $@
+inputrc: $(DOTFILES)/$(INPUTRC)
+	ln -fs $< $(LN_INPUTRC)
 
-$(LN_ALIASES): $(DOTFILES)/$(ALIASES)
-	ln -fs $< $@
+avit_theme: $(DOTFILES)/$(AVIT_THEME)
+	ln -fs $< $(LN_AVIT_THEME)
+
+aliases: $(DOTFILES)/$(ALIASES)
+	ln -fs $< $(LN_ALIASES)
 
 $(HOME)/.config/nvim:
 	mkdir -p ~/$@

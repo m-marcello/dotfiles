@@ -1,4 +1,5 @@
 INITVIM := init.vim
+NVIM_KICKSTART := nvim_kickstart/modular
 COC := coc-settings.json
 TMUX := tmux.conf
 ZSH := zshrc
@@ -8,6 +9,7 @@ AVIT_THEME := avit_moana.zsh-theme
 GIT := gitconfig
 GIT_DUSK := gitconfig-dusk
 
+LN_NVIM_KICKSTART := $(HOME)/.config/nvim
 LN_INITVIM := $(HOME)/.config/nvim/$(INITVIM)
 LN_COC := $(HOME)/.config/nvim/$(COC)
 LN_TMUX := $(HOME)/.$(TMUX)
