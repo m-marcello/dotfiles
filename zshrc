@@ -137,3 +137,7 @@ VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 # export CPPFLAGS="-I/opt/homebrew/opt/z3/include"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Fix gpg on macOs from
+# https://github.com/pstadler/keybase-gpg-github
+export GPG_TTY=$(tty)

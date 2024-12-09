@@ -1,9 +1,12 @@
 [user]
 	email = moanamarcello@gmail.com
 	name = moana
+	signingkey = BE22AFF5
 
 [core]
 	editor = nvim
 
 [includeif "gitdir:~/dusk/"]
 	path = .gitconfig-dusk
+[commit]
+	gpgsign = true
